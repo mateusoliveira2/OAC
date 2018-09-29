@@ -21,28 +21,68 @@ public class DEHamming {
 		return calculaBitsDeTeste(seq);
 	}
 	
-	public byte[] posicaoErro(byte sequencia[], byte sequencia2[]) {
+	public String posicaoErro(byte sequencia[], byte sequencia2[]) {
 		byte[] seq = this.geraBitsDeTeste(sequencia);
 		byte[] seq2 = this.geraBitsDeTeste(sequencia2);
-
-		byte p1 = (byte) (seq[0] ^ seq2[0]);
-		byte p2 = (byte) (seq[1] ^ seq2[1]);
-		byte p4 = (byte) (seq[2] ^ seq2[2]);
-		byte p8 = (byte) (seq[3] ^ seq2[3]);
+		String retorno = "";
 		
-		byte[] posicaoB = {p8, p4, p2, p1};
-		return posicaoB;
+		retorno += (byte) (seq[3] ^ seq2[3]);
+		retorno += (byte) (seq[2] ^ seq2[2]);
+		retorno += (byte) (seq[1] ^ seq2[1]);
+		retorno += (byte) (seq[0] ^ seq2[0]);
+
+		return retorno;
 	}
 	
+	public void corrige(byte sequencia[], byte sequencia2[]) {
+		String posicao = this.posicaoErro(sequencia, sequencia2);
+		switch(posicao) {
+			case "0011":
+				inverter(sequencia, 0);
+				break;
+			case "0101":
+				inverter(sequencia, 1);
+				break;
+			case "0110":
+				inverter(sequencia, 2);
+				break;
+			case "0111":
+				inverter(sequencia, 3);
+				break;
+			case "1001":
+				inverter(sequencia, 4);
+				break;
+			case "1010":
+				inverter(sequencia, 5);
+				break;
+			case "1011":
+				inverter(sequencia, 6);
+				break;
+			case "1100":
+				inverter(sequencia, 7);
+				break;
+		}
+	}
+	
+
+	private void inverter(byte[] sequencia, int i) {
+		if(sequencia[i] == 1)
+			sequencia[i] = 0;
+		else
+			sequencia[i] = 1;
+		
+	}
+
 	public static void main(String[] args) {
 		Scanner sn = new Scanner(System.in);
 		DEHamming hamming = new DEHamming();
 		
 		byte sequencia[] = {0,0,1,1,1,0,0,1};
-		byte sequencia2[] = {0,0,0,1,1,0,0,1};
+		byte sequencia2[] = {0,0,1,1,1,0,0,1};
 		
-		System.out.println(Arrays.toString(hamming.posicaoErro(sequencia, sequencia2)));
-
+		hamming.corrige(sequencia, sequencia2);
+		System.out.println(Arrays.toString(sequencia));
+		
 	}
 
 }
