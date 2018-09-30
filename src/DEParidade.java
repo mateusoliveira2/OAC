@@ -1,5 +1,14 @@
 import java.util.Scanner;
 
+
+/*
+ * Mateus de Lima Oliveira - 117110219
+ * Gabriel de Sousa Barros - 117111892
+ * OAC
+ * Método de detecção de erros de transmissão por meio do bit de paridade. 
+ * 
+ */
+
 public class DEParidade {
 	
 	public int quantUm(byte seq[]) {
@@ -31,6 +40,7 @@ public class DEParidade {
 		
 		byte sequencia[] = {1,0,0,0,0,1};
 		
+		//TRUE para par e FALSE para impar.
 		System.out.println(detectorDeErros.correto(sequencia, true));
 	}
 

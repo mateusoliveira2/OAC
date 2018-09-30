@@ -1,6 +1,15 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+/*
+ * Mateus de Lima Oliveira - 117110219
+ * Gabriel de Sousa Barros - 117111892
+ * OAC
+ * Método de correção de erros de transmissão - Hamming. 
+ * 
+ */
+
 public class DEHamming {
 	
 	private byte[] geraArrayBits(byte c1, byte c2, byte c4, byte c8) {
@@ -34,32 +43,32 @@ public class DEHamming {
 		return retorno;
 	}
 	
-	public void corrige(byte sequencia[], byte sequencia2[]) {
-		String posicao = this.posicaoErro(sequencia, sequencia2);
+	public void corrige(byte enviado[], byte recebido[]) {
+		String posicao = this.posicaoErro(enviado, recebido);
 		switch(posicao) {
 			case "0011":
-				inverter(sequencia, 0);
+				inverter(recebido, 0);
 				break;
 			case "0101":
-				inverter(sequencia, 1);
+				inverter(recebido, 1);
 				break;
 			case "0110":
-				inverter(sequencia, 2);
+				inverter(recebido, 2);
 				break;
 			case "0111":
-				inverter(sequencia, 3);
+				inverter(recebido, 3);
 				break;
 			case "1001":
-				inverter(sequencia, 4);
+				inverter(recebido, 4);
 				break;
 			case "1010":
-				inverter(sequencia, 5);
+				inverter(recebido, 5);
 				break;
 			case "1011":
-				inverter(sequencia, 6);
+				inverter(recebido, 6);
 				break;
 			case "1100":
-				inverter(sequencia, 7);
+				inverter(recebido, 7);
 				break;
 		}
 	}
@@ -77,11 +86,11 @@ public class DEHamming {
 		Scanner sn = new Scanner(System.in);
 		DEHamming hamming = new DEHamming();
 		
-		byte sequencia[] = {0,0,1,1,1,0,0,1};
-		byte sequencia2[] = {0,0,1,1,1,0,0,1};
+		byte enviado[] = {0,0,1,1,1,0,0,1};
+		byte recebido[] = {0,0,1,0,1,0,0,1};
 		
-		hamming.corrige(sequencia, sequencia2);
-		System.out.println(Arrays.toString(sequencia));
+		hamming.corrige(enviado, recebido);
+		System.out.println(Arrays.toString(recebido));
 		
 	}
 
